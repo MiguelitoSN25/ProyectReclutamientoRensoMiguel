@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace WebApiRensoMiguel.Models
+namespace WebApiRensoMiguel.Mode
 {
     public partial class FacturasAppContext : DbContext
     {
@@ -115,19 +115,19 @@ namespace WebApiRensoMiguel.Models
 
             modelBuilder.Entity<Detalle>(entity =>
             {
-                entity.HasKey(e => e.IdFacturas)
-                    .HasName("PK__Detalle__3FEF77DE66A49412");
+                entity.HasKey(e => e.IdDetalle);
 
                 entity.ToTable("Detalle");
 
-                entity.Property(e => e.IdFacturas).ValueGeneratedNever();
+                entity.Property(e => e.IdDetalle).ValueGeneratedNever();
 
                 entity.Property(e => e.Precio).HasColumnType("decimal(18, 5)");
 
-                entity.HasOne(d => d.ServiciosNavigation)
+                entity.HasOne(d => d.IdFacturasNavigation)
                     .WithMany(p => p.Detalles)
-                    .HasForeignKey(d => d.Servicios)
-                    .HasConstraintName("FK__Detalle__Servici__398D8EEE");
+                    .HasForeignKey(d => d.IdFacturas)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Detalle_Facturas");
             });
 
             modelBuilder.Entity<Factura>(entity =>

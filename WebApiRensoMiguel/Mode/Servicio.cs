@@ -1,24 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
-namespace WebApiRensoMiguel.Models
+namespace WebApiRensoMiguel.Mode
 {
     public partial class Servicio
     {
-        public Servicio()
-        {
-            Detalles = new HashSet<Detalle>();
-        }
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdServicio { get; set; }
         public string NombreServicio { get; set; }
         public decimal? Precio { get; set; }
         public int? Categoria { get; set; }
 
         public virtual Categoria CategoriaNavigation { get; set; }
-        public virtual ICollection<Detalle> Detalles { get; set; }
     }
 }

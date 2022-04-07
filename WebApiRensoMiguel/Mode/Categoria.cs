@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
-namespace WebApiRensoMiguel.Models
+namespace WebApiRensoMiguel.Mode
 {
     public partial class Categoria
     {
@@ -13,7 +12,6 @@ namespace WebApiRensoMiguel.Models
             Servicios = new HashSet<Servicio>();
         }
 
-        [Key]
         public int IdCategoria { get; set; }
         public string Nombre { get; set; }
 

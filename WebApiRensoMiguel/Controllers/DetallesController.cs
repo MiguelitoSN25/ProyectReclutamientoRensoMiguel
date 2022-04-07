@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebApiRensoMiguel.Models;
+using WebApiRensoMiguel.Mode;
 
 namespace WebApiRensoMiguel.Controllers
 {
@@ -46,7 +46,7 @@ namespace WebApiRensoMiguel.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDetalle(int id, Detalle detalle)
         {
-            if (id != detalle.IdFacturas)
+            if (id != detalle.IdDetalle)
             {
                 return BadRequest();
             }
@@ -84,7 +84,7 @@ namespace WebApiRensoMiguel.Controllers
             }
             catch (DbUpdateException)
             {
-                if (DetalleExists(detalle.IdFacturas))
+                if (DetalleExists(detalle.IdDetalle))
                 {
                     return Conflict();
                 }
@@ -94,7 +94,7 @@ namespace WebApiRensoMiguel.Controllers
                 }
             }
 
-            return CreatedAtAction("GetDetalle", new { id = detalle.IdFacturas }, detalle);
+            return CreatedAtAction("GetDetalle", new { id = detalle.IdDetalle }, detalle);
         }
 
         // DELETE: api/Detalles/5
@@ -115,7 +115,7 @@ namespace WebApiRensoMiguel.Controllers
 
         private bool DetalleExists(int id)
         {
-            return _context.Detalles.Any(e => e.IdFacturas == id);
+            return _context.Detalles.Any(e => e.IdDetalle == id);
         }
     }
 }
